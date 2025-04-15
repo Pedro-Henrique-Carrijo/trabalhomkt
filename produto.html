@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calça Powerbank</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #222;
+      color: white;
+      padding: 1rem 2rem;
+    }
+
+    .search {
+      padding: 0.5rem;
+      width: 300px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .produto-detalhe {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1000px;
+      margin: 2rem auto;
+      gap: 2rem;
+    }
+
+    .galeria {
+      flex: 1;
+      min-width: 300px;
+      position: relative;
+    }
+
+    .galeria img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .carrossel-controls {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      padding: 0 1rem;
+    }
+
+    .carrossel-controls button {
+      background-color: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.3rem 0.8rem;
+      border-radius: 50%;
+    }
+
+    .info-produto {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .info-produto h1 {
+      margin-top: 0;
+      font-size: 1.8rem;
+      color: #222;
+    }
+
+    .preco {
+      font-size: 1.5rem;
+      color: #e91e63;
+      margin: 0.5rem 0;
+    }
+
+    .tamanhos button {
+      margin: 0.25rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: white;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .tamanhos button.selecionado {
+      background-color: black;
+      color: white;
+      border-color: black;
+    }
+
+    .btn-compra {
+      margin-top: 1rem;
+      background-color: #222;
+      color: white;
+      padding: 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      width: 100%;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-compra:hover {
+      background-color: #333;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Estelar</div>
+    <input type="text" placeholder="Buscar..." class="search">
+  </header>
+
+  <main class="produto-detalhe">
+    <div class="galeria">
+      <img id="carrossel-imagem" src="imagens/ft1.png" alt="Imagem do Produto">
+      <div class="carrossel-controls">
+        <button onclick="anterior()">‹</button>
+        <button onclick="proximo()">›</button>
+      </div>
+    </div>
+
+    <div class="info-produto">
+      <h1>Calça Cargo Powerbank</h1>
+      <p class="preco">R$ 34,99 <span style="text-decoration: line-through; color: #777; font-size: 0.9rem;">R$ 89,99</span></p>
+
+      <p><strong>Cor:</strong> Preto</p>
+
+      <p><strong>Tamanho:</strong></p>
+      <div class="tamanhos">
+        <button onclick="selecionarTamanho(this)">P</button>
+        <button onclick="selecionarTamanho(this)">M</button>
+        <button onclick="selecionarTamanho(this)">G</button>
+      </div>
+
+      <button class="btn-compra">Adicionar ao carrinho</button>
+    </div>
+  </main>
+
+  <script>
+    const imagens = [
+      'imagens/ft1.png',
+      'imagens/ft2.png',
+      'imagens/ft3.png'
+    ];
+    let atual = 0;
+
+    function mostrarImagem(index) {
+      const img = document.getElementById('carrossel-imagem');
+      img.src = imagens[index];
+    }
+
+    function proximo() {
+      atual = (atual + 1) % imagens.length;
+      mostrarImagem(atual);
+    }
+
+    function anterior() {
+      atual = (atual - 1 + imagens.length) % imagens.length;
+      mostrarImagem(atual);
+    }
+
+    function selecionarTamanho(botao) {
+      const botoes = document.querySelectorAll('.tamanhos button');
+      botoes.forEach(b => b.classList.remove('selecionado'));
+      botao.classList.add('selecionado');
+    }
+  </script>
+</body>
+</html>
